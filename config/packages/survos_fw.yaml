@@ -1,0 +1,20 @@
+# Default configuration for extension with alias: "survos_fw"
+survos_fw:
+  theme: fw7
+  enabled: true
+  name: Voxitour
+  projects:
+    pokemon:
+      code: pokemon
+      logo: /logos/batsi_logo.jpeg
+      name: Pokemon
+      tabs:
+        - info
+        - pokemon
+      #          - share
+      #          - scan
+      database: Pokemon
+      stores:
+        - name: pokemon
+          schema: id
+          url: https://pokemon.wip/api/pokemon

@@ -1,0 +1,33 @@
+<div class="block">
+    <p><b>{{ t }}</b></p>
+
+    <button class="button popover-open" data-popover=".my-popover">{{ 'language'|trans|title }}</button>
+
+    <div class="popover my-popover">
+        <div class="popover-inner">
+            <div class="list inset list-strong list-dividers-ios">
+                <ul>
+                    <!-- loop over enabled_locales -->
+                    {% for locale in app.enabled_locales %}
+                        <li>
+                            <a class="external list-button" href="{{ url('project_start', {configCode: config.code, _locale: locale}) }}">
+                                {{ locale|language_name(locale) }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="list inset list-strong">
+                <ul>
+                    <li><a class="list-button color-red popover-close">{{ 'cancel'|trans }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <article>
+        {{ config.code }}
+        {{ (config.code ~ '.description')|trans|markdown_to_html }}
+    </article>
+</div>

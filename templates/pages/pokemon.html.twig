@@ -1,0 +1,95 @@
+
+{#@todo: title icon?#}
+<twig:SurvosFw:Framework7Page :caller="_self"
+             :title="'pokemon'|trans"
+>
+  <twig:block name="title">
+    @@title@@
+  </twig:block>
+  <twig:block name="content">
+    {% set store = 'pokemon' %}
+    {% set globals = {
+      locale: app.locale
+
+    } %}
+    {% set queries = {
+      pokemon: {store: 'pokemon', type: 'find' , id : '{{event.details.id}}' , templateName: 'pokemon'}
+    }%}
+    <twig:dexie
+            refreshEvent="pokemon.refresh"
+            :store="store"
+            :queries="queries"
+            :globals="globals"
+            :caller="_self">
+
+
+       <twig:block name="pokemon" id="twig_pokemon_template">
+       {% set locale = globals.locale %}
+        <h1>Pokemon</h1>
+        <sup>
+          <div class="pokemon-detail">
+          <h1>{{ data.name }}</h1>
+          <h1>{{ data.name|title }}</h1>
+          {% set description = data.content[locale] %}
+        </div>
+        </sup>
+        <!-- twig_pokemon_template -->
+      </twig:block>
+
+      <twig:block name="objects" id="twig_objects_template">
+        <h1>Objects</h1>
+        <!-- loop through data array having the objects -->
+        {% for object in data %}
+          <div class="object-detail">
+            <h1>{{ object.name|title }}</h1>
+            <p>Code: {{ object.code }}</p>
+            {% set description = object.description|default('no description') %}
+            <article>
+              <p>
+                {{ object.description|replace({"\n\n": "</p><p>"}) }}
+              </p>
+            </article>
+            <hr>
+          </div>
+        {% endfor %}
+
+        <!-- twig_objects_template -->
+      </twig:block>
+
+
+      <twig:block name="title" id="title_template">
+        <sup>
+          {{ data.code }}
+        </sup>
+        {% set locale = globals.locale %}
+        {{ data.name}}
+        <!-- title_template -->
+      </twig:block>
+      <twig:block name="twig_template" id="hack_to_get_raw_data">
+        {% set locale = globals.locale %}
+        <div class="pokemon-detail">
+          <h1>{{ data.name|title }}</h1>
+          {% set description = data.content[locale] %}
+          <article>
+            <p>
+              <p>{{ data.bio }}</p>
+              <p>{{ data.slogan }}</p>
+            </p>
+            <div>
+              <p>Birth Year: {{ data.birthYear }}</p>
+              <p>Email: {{ data.email }}</p>
+              <p>Code: {{ data.code }}</p>
+            </div>
+            <p>
+            {% for i in 1..3 %}
+              <img style="max-width: 120px"
+                      src="https://elmodo.mx/wp-content/uploads/2025/03/LRdJ_CarruselWeb_{{ i }}.jpg" />
+            {% endfor %}
+        </p>
+          </article>
+        </div>
+        <!-- hack_to_get_raw_data -->
+      </twig:block>
+    </twig:dexie>
+  </twig:block>
+</twig:SurvosFw:Framework7Page>

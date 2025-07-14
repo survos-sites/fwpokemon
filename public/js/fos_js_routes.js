@@ -1,0 +1,1 @@
+export default ({"base_url":"","routes":{"project_start":{"tokens":[["variable","\/","[^\/]++","configCode",true],["variable","\/","[^\/]++","_locale",true]],"defaults":{"_locale":""},"requirements":[],"hosttokens":[],"methods":["GET"],"schemes":[]}},"prefix":"","host":"localhost","port":"","scheme":"http","locale":""});
